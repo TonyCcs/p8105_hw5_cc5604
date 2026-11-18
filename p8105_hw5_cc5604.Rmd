@@ -114,3 +114,16 @@ study_df |>
 ```
 
 Comment: Both arms start at similar observed values at week 1. As time passes, the observed values for subjects in the experimental arm demonstrate a general trend of increase. In contrast, the observed values for subjects in the control arm stays relatively unchanged. This trend suggests that the experiment is associated with an increase in the observed outcome over time.
+
+# Problem 3
+
+## Writing a function for one simulated dataset
+```{r}
+sim_t_test = function(mu, n = 30, sigma = 5) {
+  x = rnorm(n, mean = mu, sd = sigma)
+  t.test(x, mu = 0) |>
+    broom::tidy() |>
+    select(mu_hat = estimate, p_value = p.value)
+}
+```
+

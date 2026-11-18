@@ -163,3 +163,26 @@ power_df |>
   )
 ```
 
+## Making a plot showing average estimate of mu vs true mu
+```{r}
+avg_est_df =
+  sim_results |>
+  group_by(true_mu) |>
+  summarize(
+    avg_all = mean(mu_hat),
+    avg_rejected = mean(mu_hat[reject])
+  )
+
+avg_est_df |>
+  ggplot(aes(x = true_mu)) +
+  geom_line(aes(y = avg_all, color = "All samples")) +
+  geom_point(aes(y = avg_all, color = "All samples")) +
+  geom_line(aes(y = avg_rejected, color = "Null rejected only")) +
+  geom_point(aes(y = avg_rejected, color = "Null rejected only")) +
+  labs(
+    title = "Average estimate of mu vs true mu",
+    x = "True mu",
+    y = "Average estimate of mu",
+  )
+```
+

@@ -16,7 +16,7 @@ sim_birthday = function(n) {
 }
 ```
 
-## Running function 10000 times for each group size between 2 and 50. 
+## Running function 10000 times for each group size between 2 and 5
 ```{r}
 library(tidyverse)
 

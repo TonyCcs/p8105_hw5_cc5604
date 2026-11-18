@@ -99,3 +99,17 @@ study_df =
 study_df
 ```
 
+## Spaghetti plot showing observations on each subject over time
+```{r}
+study_df |>
+  ggplot(aes(x = week, y = observation, group = subject_id, color = arm)) +
+  geom_point(alpha = 0.5) +
+  geom_line() +
+  labs(
+    title = "Observations on each subject over time",
+    x = "Week",
+    y = "Observation",
+    color = "Arm"
+  )
+```
+

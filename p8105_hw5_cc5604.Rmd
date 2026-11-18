@@ -17,7 +17,7 @@ sim_birthday = function(n) {
 ```
 
 ## Running function 10000 times for each group size between 2 and 50 (computing the probability that at least two people in the group will share a birthday by averaging across the 10000 simulation runs for each group)
-```{r}
+```{r, message=FALSE}
 library(tidyverse)
 
 set.seed(1)
@@ -48,6 +48,7 @@ sim_results_df |>
     y = "Estimated probability"
   )
 ```
+
 The probability that at least two people in the group will share a birthday forms a s-shaped curved as group size increase. The value starts at around 0 when group size is small and rises quickly after the group size reaches 10. It goes above 0.5 at a group size of 23. By the group size of 50, it reaches a plateau near 1, suggesting that a shared birthday is almost certain.
 
 # Problem 2
@@ -68,7 +69,7 @@ study_df =
 ```
 
 ## Tidying the datasets
-```{r}
+```{r, message=FALSE}
 study_df =
   study_df |>
   janitor::clean_names()|>
@@ -81,7 +82,7 @@ study_df =
       arm,
       "con" ~ "Control",
       "exp" ~ "Experimental"
-   )
+    )
   )|>
   mutate(
     subject_id = str_c(arm, "_", subject_id)
@@ -95,8 +96,6 @@ study_df =
   mutate(
     week = as.numeric(week)
   )
-
-study_df
 ```
 
 ## Spaghetti plot showing observations on each subject over time
@@ -113,7 +112,7 @@ study_df |>
   )
 ```
 
-Both arms start at similar observed values at week 1. As time passes, the observed values for subjects in the experimental arm demonstrate a general trend of increase. In contrast, the observed values for subjects in the control arm stays relatively unchanged. This trend suggests that the experiment is associated with an increase in the observed outcome over time.
+Both arms start at similar observed values at week 1. As time passes, the observed values for subjects in the experimental arm demonstrate a general trend of increase. In contrast, the observed values for subjects in the control arm stay relatively unchanged. This trend suggests that the experiment is associated with an increase in the observed outcome over time.
 
 # Problem 3
 
@@ -157,7 +156,7 @@ power_df |>
   geom_point() +
   geom_line() +
   labs(
-    title = "Power of the t-test over mu = {1,2,3,4,5,6}",
+    title = "Power of the t-test over mu = {0,1,2,3,4,5,6}",
     x = "True mu",
     y = "Power"
   )
@@ -188,4 +187,4 @@ avg_est_df |>
   )
 ```
 
-From the plot, the sample average of 𝜇̂ across tests for which the null is rejected is not equal to the true value of 𝜇.For the samples in which the null was rejected, the average estimate is too high when mu is small. This is because that conditioning on rejecting the null hypothesis filters out samples where 𝜇̂ happened to be close to zero due to random sampling variation. Therefore, when the true mu is small, only samples that happened to get a large estimate are rejected, so their average is biased upward.
+From the plot, the sample average of 𝜇̂ across tests for which the null is rejected is not equal to the true value of 𝜇 for small 𝜇. For the samples in which the null was rejected, the average estimate is too high when 𝜇 is small. This is because that conditioning on rejecting the null hypothesis filters out samples where 𝜇̂ happened to be close to zero due to random sampling variation. Therefore, when the true 𝜇 is small, only samples that happened to get a large estimate are rejected, so their average is biased upward. However, when 𝜇 exceeds 4, almost every sample is rejected, so the average is close to the true 𝜇.

@@ -113,3 +113,4 @@ study_df |>
   )
 ```
 
+Comment: Both arms start at similar observed values at week 1. As time passes, the observed values for subjects in the experimental arm demonstrate a general trend of increase. In contrast, the observed values for subjects in the control arm stays relatively unchanged. This trend suggests that the experiment is associated with an increase in the observed outcome over time.

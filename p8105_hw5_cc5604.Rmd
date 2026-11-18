@@ -11,8 +11,28 @@ output: github_document
 ```{r}
 sim_birthday = function(n) {
   birthday = sample(1:365, size = n, replace = TRUE)
-  duplicate = length(unique(birthdays)) < n
+  duplicate = length(unique(birthday)) < n
   return(duplicate)
 }
+```
+
+## Running function 10000 times for each group size between 2 and 50. 
+```{r}
+library(tidyverse)
+
+set.seed(1)
+
+sim_results_df = 
+  expand_grid(
+    group_size = 2:50,
+    iter = 1:10000
+  ) |> 
+  mutate(
+    shared = map_lgl(group_size, sim_birthday)
+  ) |> 
+  group_by(group_size) |>
+  summarize(
+    prob_shared = mean(shared)
+  )
 ```
 

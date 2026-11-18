@@ -49,3 +49,23 @@ sim_results_df |>
   )
 ```
 Comment: The probability that at least two people in the group will share a birthday forms a s-shaped curved as group size increase. The value starts at around 0 when group size is small and rises quickly after the group size reaches 10. It goes above 0.5 at a group size of 23. By the group size of 50, it reaches a plateau near 1, suggesting that a shared birthday is almost certain.
+
+# Problem 2
+
+## Importing the datasets
+```{r}
+study_df =
+  tibble(
+    name = list.files("data/", pattern = "\\.csv$")
+  )
+
+study_df =
+  study_df |>
+  mutate(
+    data = map(str_c("data/", name), read_csv)
+  )|>
+  unnest(data)
+
+study_df
+```
+

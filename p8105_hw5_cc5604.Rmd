@@ -53,7 +53,7 @@ Comment: The probability that at least two people in the group will share a birt
 # Problem 2
 
 ## Importing the datasets
-```{r}
+```{r, message=FALSE}
 study_df =
   tibble(
     name = list.files("data/", pattern = "\\.csv$")
@@ -65,6 +65,36 @@ study_df =
     data = map(str_c("data/", name), read_csv)
   )|>
   unnest(data)
+```
+
+## Tidying the datasets
+```{r}
+study_df =
+  study_df |>
+  janitor::clean_names()|>
+  mutate(
+    name = str_remove(name, "\\.csv$")
+  ) |>
+  separate(name, into = c("arm", "subject_id"), sep = "_") |>
+  mutate(
+    arm = case_match(
+      arm,
+      "con" ~ "Control",
+      "exp" ~ "Experimental"
+   )
+  )|>
+  mutate(
+    subject_id = str_c(arm, "_", subject_id)
+  )|>
+  pivot_longer(
+    cols = starts_with("week_"),
+    names_to = "week",
+    names_prefix = "week_",
+    values_to = "observation"
+  ) |>
+  mutate(
+    week = as.numeric(week)
+  )
 
 study_df
 ```

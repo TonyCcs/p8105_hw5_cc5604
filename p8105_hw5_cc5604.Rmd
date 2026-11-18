@@ -127,3 +127,19 @@ sim_t_test = function(mu, n = 30, sigma = 5) {
 }
 ```
 
+## Generating 5000 datasets for 𝜇={1,2,3,4,5,6}
+```{r}
+sim_results =
+  expand_grid(
+    true_mu = 0:6,
+    iter = 1:5000
+  ) |>
+  mutate(
+    test_result = map(true_mu, sim_t_test)
+  ) |>
+  unnest(test_result) |>
+  mutate(
+    reject = p_value < 0.05
+  )
+```
+

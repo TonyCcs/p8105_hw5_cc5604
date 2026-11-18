@@ -48,7 +48,7 @@ sim_results_df |>
     y = "Estimated probability"
   )
 ```
-Comment: The probability that at least two people in the group will share a birthday forms a s-shaped curved as group size increase. The value starts at around 0 when group size is small and rises quickly after the group size reaches 10. It goes above 0.5 at a group size of 23. By the group size of 50, it reaches a plateau near 1, suggesting that a shared birthday is almost certain.
+The probability that at least two people in the group will share a birthday forms a s-shaped curved as group size increase. The value starts at around 0 when group size is small and rises quickly after the group size reaches 10. It goes above 0.5 at a group size of 23. By the group size of 50, it reaches a plateau near 1, suggesting that a shared birthday is almost certain.
 
 # Problem 2
 
@@ -113,7 +113,7 @@ study_df |>
   )
 ```
 
-Comment: Both arms start at similar observed values at week 1. As time passes, the observed values for subjects in the experimental arm demonstrate a general trend of increase. In contrast, the observed values for subjects in the control arm stays relatively unchanged. This trend suggests that the experiment is associated with an increase in the observed outcome over time.
+Both arms start at similar observed values at week 1. As time passes, the observed values for subjects in the experimental arm demonstrate a general trend of increase. In contrast, the observed values for subjects in the control arm stays relatively unchanged. This trend suggests that the experiment is associated with an increase in the observed outcome over time.
 
 # Problem 3
 
@@ -163,6 +163,8 @@ power_df |>
   )
 ```
 
+The plot shows that power increases as the effect size increases (positive correlation). The s-shaped curve suggests that power starts at near 0 when the effect size is small. As effect size increases, power rises quickly and reaches the plateau at around 1 after the true mu exceeds 4.
+
 ## Making a plot showing average estimate of mu vs true mu
 ```{r}
 avg_est_df =
@@ -186,3 +188,4 @@ avg_est_df |>
   )
 ```
 
+From the plot, the sample average of 𝜇̂ across tests for which the null is rejected is not equal to the true value of 𝜇.For the samples in which the null was rejected, the average estimate is too high when mu is small. This is because that conditioning on rejecting the null hypothesis filters out samples where 𝜇̂ happened to be close to zero due to random sampling variation. Therefore, when the true mu is small, only samples that happened to get a large estimate are rejected, so their average is biased upward.

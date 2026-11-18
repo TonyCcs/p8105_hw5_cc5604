@@ -183,7 +183,7 @@ avg_est_df |>
   labs(
     title = "Average estimate of mu vs true mu",
     x = "True mu",
-    y = "Average estimate of mu",
+    y = "Average estimate of mu"
   )
 ```
 
